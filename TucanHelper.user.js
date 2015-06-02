@@ -18,4 +18,18 @@ var style=document.createElement("style");
 style.textContent=css;
 document.body.appendChild(style);
 
+$(function() {
+  $(".tb tr.tbdata").each(function() {
+    var $link = $(this).find("a[name=roomAppointmentsLink]");
+    var roomNr = $link.attr("href").match(/\d+$/);
+    var $nextrow = $(this).next().find("td");
+    $nextrow.append(" RaumNr: "+roomNr);
+    $nextrow.append(" <a href='/scripts/mgrqcgi?APPNAME=CampusNet&PRGNAME=SCHEDULER&ARGUMENTS=-N000000000000001,-N000385,-A05.10.2015,-A,-N1,-N"+roomNr+"'>Termine Ophase</a>");
+    $nextrow.find("a").click(function() {
+      open(this.href, "termine","width=800,height=600,scrollbars=yes");
+      return false;
+    });
+  })
+  
+})
 
